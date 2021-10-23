@@ -1,17 +1,16 @@
 using System;
 using System.Linq;
-using NUnit.Framework; 
-using RVEzy.Models;
 using AutoFixture;
 using AutoFixture.AutoMoq;
 using Microsoft.EntityFrameworkCore;
 using Moq;
+using NUnit.Framework;
 using RVEzy.Controllers;
 using RVEzy.DAL;
 
-namespace RVEzy.Tests.Application
+namespace RVEzy.Tests.Controllers
 {
-    public class ListingsTests
+    public class ListingsControllerTests
     {
         public Fixture Fixture { get; private set; }
         private ListingRepository _repository;
