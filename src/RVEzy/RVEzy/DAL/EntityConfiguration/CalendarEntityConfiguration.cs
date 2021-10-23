@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using RVEzy.Models;
 
 namespace RVEzy.DAL.EntityConfiguration
 {
+    [ExcludeFromCodeCoverage]
     public class CalendarEntityConfiguration : IEntityTypeConfiguration<Calendar>
     {
         public void Configure(EntityTypeBuilder<Calendar> builder)

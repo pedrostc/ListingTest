@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using RVEzy.Models;
 
 namespace RVEzy.DAL.EntityConfiguration
 {
+    [ExcludeFromCodeCoverage]
     public class ListingEntityConfiguration : IEntityTypeConfiguration<Listing>
     {
         public void Configure(EntityTypeBuilder<Listing> builder)

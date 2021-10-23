@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
@@ -28,12 +29,22 @@ namespace RVEzy.Controllers
         {
             return await _listingRepository.GetListing(id);
         }
-
-
+        
         [HttpGet]
         public async Task<IEnumerable<Listing>> Get(int pageSize = 1, int pageNumber = 1, PropertyType? propertyType = null)
         {
             return await _listingRepository.GetListings(pageSize, pageNumber, propertyType);
+        }
+
+        [HttpPost]
+        public async Task<Listing> Create(Listing newListing)
+        {
+            if (newListing == null)
+            {
+                throw new ArgumentNullException(nameof(newListing));
+            }
+
+            return null;
         }
     }
 }
