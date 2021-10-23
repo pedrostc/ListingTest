@@ -28,12 +28,28 @@ namespace RVEzy.DAL
             return await Listings.FirstOrDefaultAsync(l => l.Id == listingId);
         }
 
-        public async Task<ICollection<Listing>> GetListings(int pageSize, int pageNumber)
+        public async Task<ICollection<Listing>> GetListings(int pageSize, int pageNumber, PropertyType? propertyType = null)
         {
-            return await Listings
-                .Skip(pageSize * (pageNumber - 1))
-                .Take(pageSize)
+            var query = ApplyPagination(Listings, pageSize, pageNumber);
+            query = ApplyFilter(query, propertyType);
+
+            return await query
                 .ToListAsync();
+        }
+
+        private IQueryable<Listing> ApplyFilter(IQueryable<Listing> query, PropertyType? propertyType)
+        {
+            return !propertyType.HasValue
+                ? query
+                : query.Where(l => l.PropertyType == propertyType);
+
+        }
+
+        private IQueryable<Listing> ApplyPagination(IQueryable<Listing> query, int pageSize, int pageNumber)
+        {
+            return Listings
+                .Skip(pageSize * (pageNumber - 1))
+                .Take(pageSize);
         }
     }
 }

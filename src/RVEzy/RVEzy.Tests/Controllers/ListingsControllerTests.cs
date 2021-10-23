@@ -7,9 +7,11 @@ using Moq;
 using NUnit.Framework;
 using RVEzy.Controllers;
 using RVEzy.DAL;
+using RVEzy.Models;
 
 namespace RVEzy.Tests.Controllers
 {
+    [TestFixture]
     public class ListingsControllerTests
     {
         public Fixture Fixture { get; private set; }
@@ -34,7 +36,7 @@ namespace RVEzy.Tests.Controllers
         [TestCase(2, 2, 1)]
         [TestCase(2, 1, 2)]
         [TestCase(4, 1, 3)]
-        public void GetListings_ReturnsListings(int pageSize, int pageNumber, int expectedCount)
+        public void GetListings_PageInfoNoTypeFilter_ReturnsListings(int pageSize, int pageNumber, int expectedCount)
         {
             var listingsApp = Fixture
                 .Build<ListingsController>()
@@ -44,6 +46,21 @@ namespace RVEzy.Tests.Controllers
             var result = listingsApp.Get(pageSize, pageNumber).Result;
 
             
+            Assert.AreEqual(expectedCount, result.Count());
+        }
+
+        [TestCase(PropertyType.House, 1)]
+        [TestCase(PropertyType.Apartment, 2)]
+        public void GetListings_PropertyTypeFilter_ReturnsListings(PropertyType propertyType, int expectedCount)
+        {
+            var listingsApp = Fixture
+                .Build<ListingsController>()
+                .OmitAutoProperties()
+                .Create();
+
+            var result = listingsApp.Get(3, 1, propertyType).Result;
+
+
             Assert.AreEqual(expectedCount, result.Count());
         }
 

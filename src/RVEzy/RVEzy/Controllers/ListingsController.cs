@@ -31,9 +31,9 @@ namespace RVEzy.Controllers
 
 
         [HttpGet]
-        public async Task<IEnumerable<Listing>> Get(int pageSize = 1, int pageNumber = 1)
+        public async Task<IEnumerable<Listing>> Get(int pageSize = 1, int pageNumber = 1, PropertyType? propertyType = null)
         {
-            return await _listingRepository.GetListings(pageSize, pageNumber);
+            return await _listingRepository.GetListings(pageSize, pageNumber, propertyType);
         }
     }
 }
