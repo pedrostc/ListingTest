@@ -13,7 +13,15 @@ namespace RVEzy.DAL.EntityConfiguration
         public void Configure(EntityTypeBuilder<Listing> builder)
         {
             builder.HasKey(l => l.Id);
+            builder
+                .HasMany(l => l.Reviews)
+                .WithOne(r => r.Listing);
 
+            builder
+                .HasMany(l => l.Calendar)
+                .WithOne(c => c.Listing);
+
+            //TODO: move seed data somewhere else
             builder.HasData(new List<Listing>
             {
                 new Listing

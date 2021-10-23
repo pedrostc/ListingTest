@@ -12,6 +12,9 @@ namespace RVEzy.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public PropertyType PropertyType { get; set; }
+
+        public ICollection<Review> Reviews { get; set; }
+        public ICollection<Calendar> Calendar { get; set; }
     }
 
     public enum PropertyType
